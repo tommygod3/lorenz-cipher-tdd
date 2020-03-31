@@ -1,0 +1,48 @@
+name:                tdd-vernam-cipher
+version:             0.1.0.0
+github:              "tommygod3/tdd-vernam-cipher"
+license:             MIT
+author:              "Tommy Godfrey"
+maintainer:          "tommygod1@live.com"
+copyright:           "2020 Tommy Godfrey"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/tommygod3/tdd-vernam-cipher#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+
+executables:
+  tdd-vernam-cipher-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - tdd-vernam-cipher
+
+tests:
+  tdd-vernam-cipher-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - tdd-vernam-cipher
