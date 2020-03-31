@@ -29,7 +29,7 @@ prop_encodeChar x =
 -- decodeChar
 prop_decodeCharInRange :: Int -> Bool
 prop_decodeCharInRange x = 
-    ord (decodeChar x) <= 95
+    ord (decodeChar x) <= 127
 
 prop_decodeCharPositive :: Int -> Bool
 prop_decodeCharPositive x = 
