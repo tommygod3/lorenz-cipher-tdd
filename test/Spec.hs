@@ -42,9 +42,9 @@ prop_decodeCharIsAscii x =
 prop_decodeChar :: Int -> Bool
 prop_decodeChar x = 
     decodeChar x == 
-        if (32 <= x) && (x <= 126)
-            then chr (x - 32)
-        else chr 95
+        if (0 <= x) && (x <= 94)
+            then chr (x + 32)
+        else chr 127
 
 -- main
 return []
