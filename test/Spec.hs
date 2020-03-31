@@ -12,7 +12,7 @@ import Lorenz
 
 prop_encodeCharInRange :: Char -> Bool
 prop_encodeCharInRange x = 
-    encodeChar x <= 94
+    encodeChar x <= 95
 
 prop_encodeCharPositive :: Char -> Bool
 prop_encodeCharPositive x = 
