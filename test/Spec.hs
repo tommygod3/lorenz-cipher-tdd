@@ -5,11 +5,10 @@ module Main where
 
 import Test.QuickCheck
 
+import Vernam
+
 -- tests
 
-prop_reverseLength :: [Int] -> Bool
-prop_reverseLength xs = 
-    length xs == length (reverse xs)
 
 -- main
 return []

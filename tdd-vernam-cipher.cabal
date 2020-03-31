@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 555b188e30a7e81726d70bea3a82720b8c21d119b64dedb4c1ee397f3d4190b3
+-- hash: 29003a6c2279b7694f3ad6a2c61e02dbdf3d46abdfbc042a90c67c3e990cc5a6
 
 name:           tdd-vernam-cipher
 version:        0.1.0.0
@@ -27,7 +27,7 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      Vernam
   other-modules:
       Paths_tdd_vernam_cipher
   hs-source-dirs:

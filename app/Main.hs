@@ -1,6 +1,6 @@
 module Main where
 
-import Lib
+import Vernam
 
 main :: IO ()
 main = someFunc
