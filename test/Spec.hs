@@ -23,7 +23,7 @@ prop_encodeChar x =
     chr (encodeChar x) == 
         if (32 <= ord x) && (ord x <= 126)
             then chr ((ord x) - 32) 
-        else chr 127
+        else chr 95
 
 -- main
 return []
