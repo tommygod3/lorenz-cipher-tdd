@@ -20,7 +20,10 @@ prop_encodeCharPositive x =
 
 prop_encodeChar :: Char -> Bool
 prop_encodeChar x = 
-    chr (encodeChar x) == chr ((ord x) - 32)
+    chr (encodeChar x) == 
+        if (32 <= ord x) && (ord x <= 126)
+            then chr ((ord x) - 32) 
+        else chr 127
 
 -- main
 return []
