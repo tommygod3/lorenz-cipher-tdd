@@ -1,4 +1,4 @@
-module Vernam where
+module Lorenz where
 
 someFunc :: IO ()
 someFunc = putStrLn "someFunc"

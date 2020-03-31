@@ -1,6 +1,6 @@
 module Main where
 
-import Vernam
+import Lorenz
 
 main :: IO ()
 main = someFunc

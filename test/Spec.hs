@@ -5,7 +5,7 @@ module Main where
 
 import Test.QuickCheck
 
-import Vernam
+import Lorenz
 
 -- tests
 

@@ -1,6 +1,6 @@
-name:                tdd-vernam-cipher
+name:                haskell-lorenz-cipher
 version:             0.1.0.0
-github:              "tommygod3/tdd-vernam-cipher"
+github:              "tommygod3/haskell-lorenz-cipher"
 license:             MIT
 author:              "Tommy Godfrey"
 maintainer:          "tommygod1@live.com"
@@ -17,7 +17,7 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/tommygod3/tdd-vernam-cipher#readme>
+description:         Please see the README on GitHub at <https://github.com/tommygod3/haskell-lorenz-cipher#readme>
 
 dependencies:
 - base >= 4.7 && < 5
@@ -27,7 +27,7 @@ library:
   source-dirs: src
 
 executables:
-  tdd-vernam-cipher-exe:
+  haskell-lorenz-cipher-exe:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -35,10 +35,10 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - tdd-vernam-cipher
+    - haskell-lorenz-cipher
 
 tests:
-  tdd-vernam-cipher-test:
+  haskell-lorenz-cipher-test:
     main:                Spec.hs
     source-dirs:         test
     ghc-options:
@@ -46,4 +46,4 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - tdd-vernam-cipher
+    - haskell-lorenz-cipher

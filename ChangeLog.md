@@ -1,3 +1,3 @@
-# Changelog for tdd-vernam-cipher
+# Changelog for haskell-lorenz-cipher
 
 ## Unreleased changes
