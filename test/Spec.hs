@@ -5,13 +5,18 @@ module Main where
 
 import Test.QuickCheck
 
+import Data.Char
 import Lorenz
 
 -- tests
 
 prop_encodeCharInRange :: Char -> Bool
 prop_encodeCharInRange x = 
-    0 <= encodeChar x <= 94
+    encodeChar x <= 94
+
+prop_encodeCharPositive :: Char -> Bool
+prop_encodeCharPositive x = 
+    0 <= encodeChar x
 
 prop_encodeChar :: Char -> Bool
 prop_encodeChar x = 

@@ -1,4 +1,7 @@
 module Lorenz where
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+import Data.Char
+
+encodeChar :: Char -> Int
+encodeChar x = (ord x) - 32
+
