@@ -37,4 +37,6 @@ randomChar seedPair =
     SeedPair (randomR ('\32', '\95') (getSeed seedPair) :: (Char, StdGen))
 
 lorenzCipher :: String -> Char -> String
-lorenzCipher input key = "hello"
+lorenzCipher input key = fst $ foldr (\x (decoded, seedPair) -> 
+                ((vernamCipher x (getChr seedPair) : decoded), (randomChar seedPair)))
+                ([], (seededRandomChar key)) input
