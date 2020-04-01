@@ -90,6 +90,11 @@ prop_seededRandomCharIdempotent :: Char -> Bool
 prop_seededRandomCharIdempotent seed = 
     fst (seededRandomChar seed) == fst (seededRandomChar seed)
 
+-- randomChar
+prop_randomCharIsAscii :: (Char, StdGen) -> Bool
+prop_randomCharIsAscii seed = 
+    isAscii (fst (randomChar seed))
+
 -- main
 return []
 main = $quickCheckAll
