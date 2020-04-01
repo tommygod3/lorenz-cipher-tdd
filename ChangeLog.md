@@ -1,3 +1,3 @@
-# Changelog for haskell-lorenz-cipher
+# Changelog for lorenz-cipher-tdd
 
 ## Unreleased changes

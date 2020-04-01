@@ -4,13 +4,13 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5e7da47c22afcf7732984b6062424a0e1a6fd1c668e261281065514e3079fc9b
+-- hash: a2104d14e967744e9fb9641867566fd0d055be33d22b937dcdad05908a41efed
 
-name:           haskell-lorenz-cipher
+name:           lorenz-cipher-tdd
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/tommygod3/haskell-lorenz-cipher#readme>
-homepage:       https://github.com/tommygod3/haskell-lorenz-cipher#readme
-bug-reports:    https://github.com/tommygod3/haskell-lorenz-cipher/issues
+description:    Please see the README on GitHub at <https://github.com/tommygod3/lorenz-cipher-tdd#readme>
+homepage:       https://github.com/tommygod3/lorenz-cipher-tdd#readme
+bug-reports:    https://github.com/tommygod3/lorenz-cipher-tdd/issues
 author:         Tommy Godfrey
 maintainer:     tommygod1@live.com
 copyright:      2020 Tommy Godfrey
@@ -23,13 +23,13 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/tommygod3/haskell-lorenz-cipher
+  location: https://github.com/tommygod3/lorenz-cipher-tdd
 
 library
   exposed-modules:
       Lorenz
   other-modules:
-      Paths_haskell_lorenz_cipher
+      Paths_lorenz_cipher_tdd
   hs-source-dirs:
       src
   build-depends:
@@ -38,31 +38,31 @@ library
     , random
   default-language: Haskell2010
 
-executable haskell-lorenz-cipher-exe
+executable lorenz-cipher-tdd-exe
   main-is: Main.hs
   other-modules:
-      Paths_haskell_lorenz_cipher
+      Paths_lorenz_cipher_tdd
   hs-source-dirs:
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       QuickCheck
     , base >=4.7 && <5
-    , haskell-lorenz-cipher
+    , lorenz-cipher-tdd
     , random
   default-language: Haskell2010
 
-test-suite haskell-lorenz-cipher-test
+test-suite lorenz-cipher-tdd-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      Paths_haskell_lorenz_cipher
+      Paths_lorenz_cipher_tdd
   hs-source-dirs:
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       QuickCheck
     , base >=4.7 && <5
-    , haskell-lorenz-cipher
+    , lorenz-cipher-tdd
     , random
   default-language: Haskell2010
