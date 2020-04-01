@@ -129,6 +129,10 @@ prop_lorenzCipherInputChanges input key =
         then or (map charInRange (lorenzCipher input key))
     else length (lorenzCipher input key) == length (input)
 
+prop_lorenzCipherIdempotent :: String -> Char -> Bool
+prop_lorenzCipherIdempotent input key =
+    lorenzCipher input key == lorenzCipher input key
+
 --------------------------------------------------------------------------
 -- main
 return []
