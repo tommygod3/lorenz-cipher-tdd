@@ -49,7 +49,11 @@ prop_decodeChar x =
 -- vernam cipher
 prop_vernamCipherIsAscii :: Char -> Char -> Bool
 prop_vernamCipherIsAscii input key =
-    isAscii (vernamCipher input key) 
+    isAscii (vernamCipher input key)
+
+prop_vernamCipherInputChanges :: Char -> Char -> Bool
+prop_vernamCipherInputChanges input key =
+    vernamCipher input key /= vernamCipher (decodeChar (rem ((encodeChar input) + 1) 95)) key
 
 -- main
 return []
