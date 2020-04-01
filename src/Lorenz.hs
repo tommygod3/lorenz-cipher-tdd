@@ -2,6 +2,7 @@ module Lorenz where
 
 import Data.Char
 import Data.Bits
+import System.Random
 
 -- Shift range of ASCII characters (32-95) to be Int between 0 and 94
 -- All other ASCII characters go to 63 (_)
@@ -19,3 +20,5 @@ decodeChar x = chr (x + 32)
 vernamCipher :: Char -> Char -> Char
 vernamCipher input key = decodeChar (xor (encodeChar input) (encodeChar key))
 
+seededRandomChar :: Char -> (Char, StdGen)
+seededRandomChar seed = randomR ('\32', '\95') (mkStdGen (ord seed)) :: (Char, StdGen)
