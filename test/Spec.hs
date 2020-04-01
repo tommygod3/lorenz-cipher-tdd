@@ -20,6 +20,11 @@ instance Arbitrary SeedPair where
         return (SeedPair (x, mkStdGen y))
 
 --------------------------------------------------------------------------
+-- helper
+charInRange :: Char -> Bool
+charInRange x = (32 <= ord x) && (ord x <= 95)
+
+--------------------------------------------------------------------------
 -- properties
 
 -- encodeChar
@@ -34,7 +39,7 @@ prop_encodeCharPositive x =
 prop_encodeChar :: Char -> Bool
 prop_encodeChar x = 
     encodeChar x == 
-        if (32 <= ord x) && (ord x <= 95)
+        if charInRange x
             then (ord x) - 32
         else 63
 
@@ -65,10 +70,10 @@ prop_vernamCipherIsAscii input key =
 
 prop_vernamCipherInputChanges :: Char -> Char -> Bool
 prop_vernamCipherInputChanges input key =
-    if ((32 <= ord input) && (ord input <= 95)) && ((32 <= ord key) && (ord key <= 95))
+    if charInRange input && charInRange key
         then vernamCipher input key /= vernamCipher (decodeChar (rem ((encodeChar input) + 1) 63)) key
-    else if ((32 <= ord input) && (ord input <= 95)) || ((32 <= ord key) && (ord key <= 95))
-        then (32 <= ord (vernamCipher input key)) && (ord (vernamCipher input key) <= 95)
+    else if charInRange input || charInRange key
+        then charInRange (vernamCipher input key)
     else vernamCipher input key == ' '
 
 prop_vernamCipherSymmetry :: Char -> Char -> Bool
@@ -77,15 +82,15 @@ prop_vernamCipherSymmetry input key =
 
 prop_vernamCipherReciprocity :: Char -> Char -> Bool
 prop_vernamCipherReciprocity input key =
-    if ((32 <= ord input) && (ord input <= 95)) && ((32 <= ord key) && (ord key <= 95))
+    if charInRange input && charInRange key
         then
             (vernamCipher (vernamCipher input key) key == input)
             && (vernamCipher (vernamCipher input key) input == key)
-    else if ((32 <= ord input) && (ord input <= 95)) && not ((32 <= ord key) && (ord key <= 95))
+    else if charInRange input && not (charInRange key)
         then
             (vernamCipher (vernamCipher input key) key == input)
             && (vernamCipher (vernamCipher input key) input == '_')
-    else if not ((32 <= ord input) && (ord input <= 95)) && ((32 <= ord key) && (ord key <= 95))
+    else if not (charInRange input) && charInRange key
         then
             (vernamCipher (vernamCipher input key) key == '_')
             && (vernamCipher (vernamCipher input key) input == key)
