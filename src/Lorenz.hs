@@ -20,8 +20,18 @@ decodeChar x = chr (x + 32)
 vernamCipher :: Char -> Char -> Char
 vernamCipher input key = decodeChar (xor (encodeChar input) (encodeChar key))
 
-seededRandomChar :: Char -> (Char, StdGen)
-seededRandomChar seed = randomR ('\32', '\95') (mkStdGen (ord seed)) :: (Char, StdGen)
+data SeedPair = SeedPair (Char, StdGen) deriving (Show, Read)
 
-randomChar :: (Char, StdGen) -> (Char, StdGen)
-randomChar (previous, seed) = randomR ('\32', '\95') seed :: (Char, StdGen)
+getChar :: SeedPair -> Char
+getChar (SeedPair pair) = fst pair
+
+getSeed :: SeedPair -> StdGen
+getSeed (SeedPair pair) = snd pair
+
+seededRandomChar :: Char -> SeedPair
+seededRandomChar seed =
+    SeedPair (randomR ('\32', '\95') (mkStdGen (ord seed)) :: (Char, StdGen))
+
+randomChar :: SeedPair -> SeedPair
+randomChar seedPair = 
+    SeedPair (randomR ('\32', '\95') (getSeed seedPair) :: (Char, StdGen))
