@@ -59,6 +59,28 @@ prop_vernamCipherInputChanges input key =
         then (32 <= ord (vernamCipher input key)) && (ord (vernamCipher input key) <= 95)
     else vernamCipher input key == ' '
 
+prop_vernamCipherSymmetry :: Char -> Char -> Bool
+prop_vernamCipherSymmetry input key =
+    vernamCipher input key == vernamCipher key input
+
+prop_vernamCipherReciprocity :: Char -> Char -> Bool
+prop_vernamCipherReciprocity input key =
+    if ((32 <= ord input) && (ord input <= 95)) && ((32 <= ord key) && (ord key <= 95))
+        then
+            (vernamCipher (vernamCipher input key) key == input)
+            && (vernamCipher (vernamCipher input key) input == key)
+    else if ((32 <= ord input) && (ord input <= 95)) && not ((32 <= ord key) && (ord key <= 95))
+        then
+            (vernamCipher (vernamCipher input key) key == input)
+            && (vernamCipher (vernamCipher input key) input == '_')
+    else if not ((32 <= ord input) && (ord input <= 95)) && ((32 <= ord key) && (ord key <= 95))
+        then
+            (vernamCipher (vernamCipher input key) key == '_')
+            && (vernamCipher (vernamCipher input key) input == key)
+    else
+        (vernamCipher (vernamCipher input key) key == '_')
+        && (vernamCipher (vernamCipher input key) input == '_')
+
 -- main
 return []
 main = $quickCheckAll
