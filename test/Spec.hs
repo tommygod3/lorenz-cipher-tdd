@@ -71,7 +71,7 @@ prop_vernamCipherIsAscii input key =
 prop_vernamCipherInputChanges :: Char -> Char -> Bool
 prop_vernamCipherInputChanges input key =
     if charInRange input && charInRange key
-        then vernamCipher input key /= vernamCipher (decodeChar (rem ((encodeChar input) + 1) 63)) key
+        then vernamCipher input key /= vernamCipher (decodeChar (rem (encodeChar input + 1) 63)) key
     else if charInRange input || charInRange key
         then charInRange (vernamCipher input key)
     else vernamCipher input key == ' '
@@ -116,6 +116,14 @@ prop_randomCharIsAscii seed =
 prop_lorenzCipherIsAscii :: String -> Char -> Bool
 prop_lorenzCipherIsAscii input key =
     or (map isAscii (lorenzCipher input key))
+
+prop_lorenzCipherInputChanges :: Char -> Char -> Bool
+prop_lorenzCipherInputChanges input key =
+    if or (map charInRange input) && charInRange key
+        then lorenzCipher input key /= lorenzCipher (decodeChar (rem (encodeChar (head input) + 1) 63)) key
+    else if or (map charInRange input) || charInRange key
+        then or (map charInRange (lorenzCipher input key))
+    else len (lorenzCipher input key) == len (input)
 
 --------------------------------------------------------------------------
 -- main
