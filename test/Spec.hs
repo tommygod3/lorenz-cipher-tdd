@@ -46,7 +46,7 @@ prop_decodeChar x =
             then chr (x + 32)
         else chr 63
 
--- vernam cipher
+-- vernamCipher
 prop_vernamCipherIsAscii :: Char -> Char -> Bool
 prop_vernamCipherIsAscii input key =
     isAscii (vernamCipher input key)
@@ -80,6 +80,11 @@ prop_vernamCipherReciprocity input key =
     else
         (vernamCipher (vernamCipher input key) key == '_')
         && (vernamCipher (vernamCipher input key) input == '_')
+
+-- seededRandomChar
+prop_seededRandomCharIsAscii :: Char -> Bool
+prop_seededRandomCharIsAscii seed = 
+    isAscii (fst (seededRandomChar seed))
 
 -- main
 return []
