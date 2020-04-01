@@ -112,6 +112,11 @@ prop_randomCharIsAscii :: SeedPair -> Bool
 prop_randomCharIsAscii seed = 
     isAscii (getChr (randomChar seed))
 
+-- lorenzCipher
+prop_lorenzCipherIsAscii :: String -> Char -> Bool
+prop_lorenzCipherIsAscii input key =
+    or (map isAscii (lorenzCipher input key))
+
 --------------------------------------------------------------------------
 -- main
 return []
