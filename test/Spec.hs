@@ -115,11 +115,15 @@ prop_randomCharIsAscii seed =
 -- lorenzCipher
 prop_lorenzCipherIsAscii :: String -> Char -> Bool
 prop_lorenzCipherIsAscii input key =
-    or (map isAscii (lorenzCipher input key))
+    if length input > 0
+        then or (map isAscii (lorenzCipher input key))
+    else lorenzCipher input key == input
 
 prop_lorenzCipherInputChanges :: String -> Char -> Bool
 prop_lorenzCipherInputChanges input key =
-    if or (map charInRange input) && charInRange key
+    if length input == 0
+        then lorenzCipher input key == input
+    else if or (map charInRange input) && charInRange key
         then lorenzCipher input key /= lorenzCipher ((decodeChar (rem (encodeChar (head input) + 1) 63)) : tail input) key
     else if or (map charInRange input) || charInRange key
         then or (map charInRange (lorenzCipher input key))
