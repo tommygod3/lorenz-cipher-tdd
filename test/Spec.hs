@@ -1,6 +1,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 module Main where
 
+--------------------------------------------------------------------------
 -- imports
 
 import Test.QuickCheck
@@ -9,7 +10,17 @@ import Data.Char
 import System.Random
 import Lorenz
 
--- tests
+--------------------------------------------------------------------------
+-- generators
+
+instance Arbitrary SeedPair where
+    arbitrary = do
+        x <- arbitrary
+        y <- arbitrary
+        return (SeedPair (x, mkStdGen y))
+
+--------------------------------------------------------------------------
+-- properties
 
 -- encodeChar
 prop_encodeCharInRange :: Char -> Bool
@@ -85,17 +96,18 @@ prop_vernamCipherReciprocity input key =
 -- seededRandomChar
 prop_seededRandomCharIsAscii :: Char -> Bool
 prop_seededRandomCharIsAscii seed = 
-    isAscii (fst (seededRandomChar seed))
+    isAscii (getChr (seededRandomChar seed))
 
 prop_seededRandomCharIdempotent :: Char -> Bool
 prop_seededRandomCharIdempotent seed = 
-    fst (seededRandomChar seed) == fst (seededRandomChar seed)
+    getChr (seededRandomChar seed) == getChr (seededRandomChar seed)
 
 -- randomChar
-prop_randomCharIsAscii :: (Char, StdGen) -> Bool
+prop_randomCharIsAscii :: SeedPair -> Bool
 prop_randomCharIsAscii seed = 
-    isAscii (fst (randomChar seed))
+    isAscii (getChr (randomChar seed))
 
+--------------------------------------------------------------------------
 -- main
 return []
 main = $quickCheckAll
