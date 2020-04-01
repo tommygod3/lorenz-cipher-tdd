@@ -46,6 +46,11 @@ prop_decodeChar x =
             then chr (x + 32)
         else chr 127
 
+-- vernam cipher
+prop_vernamCipherIsAscii :: Char -> Char -> Bool
+prop_vernamCipherIsAscii message key =
+    isAscii (vernamCipher message key) 
+
 -- main
 return []
 main = $quickCheckAll
