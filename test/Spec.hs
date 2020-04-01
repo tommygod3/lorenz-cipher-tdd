@@ -120,7 +120,7 @@ prop_lorenzCipherIsAscii input key =
 prop_lorenzCipherInputChanges :: String -> Char -> Bool
 prop_lorenzCipherInputChanges input key =
     if or (map charInRange input) && charInRange key
-        then lorenzCipher input key /= lorenzCipher (decodeChar (rem (encodeChar (head input) + 1) 63)) key
+        then lorenzCipher input key /= lorenzCipher ((decodeChar (rem (encodeChar (head input) + 1) 63)) : tail input) key
     else if or (map charInRange input) || charInRange key
         then or (map charInRange (lorenzCipher input key))
     else length (lorenzCipher input key) == length (input)
