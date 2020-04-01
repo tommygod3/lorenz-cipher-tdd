@@ -6,6 +6,7 @@ module Main where
 import Test.QuickCheck
 
 import Data.Char
+import System.Random
 import Lorenz
 
 -- tests

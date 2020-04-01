@@ -22,3 +22,6 @@ vernamCipher input key = decodeChar (xor (encodeChar input) (encodeChar key))
 
 seededRandomChar :: Char -> (Char, StdGen)
 seededRandomChar seed = randomR ('\32', '\95') (mkStdGen (ord seed)) :: (Char, StdGen)
+
+randomChar :: (Char, StdGen) -> (Char, StdGen)
+randomChar (previous, seed) = randomR ('\32', '\95') seed :: (Char, StdGen)
