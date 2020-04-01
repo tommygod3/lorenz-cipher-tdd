@@ -35,3 +35,6 @@ seededRandomChar seed =
 randomChar :: SeedPair -> SeedPair
 randomChar seedPair = 
     SeedPair (randomR ('\32', '\95') (getSeed seedPair) :: (Char, StdGen))
+
+lorenzCipher :: String -> Char -> String
+lorenzCipher input key = "hello"
