@@ -48,8 +48,8 @@ prop_decodeChar x =
 
 -- vernam cipher
 prop_vernamCipherIsAscii :: Char -> Char -> Bool
-prop_vernamCipherIsAscii message key =
-    isAscii (vernamCipher message key) 
+prop_vernamCipherIsAscii input key =
+    isAscii (vernamCipher input key) 
 
 -- main
 return []

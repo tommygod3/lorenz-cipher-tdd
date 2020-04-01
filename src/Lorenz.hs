@@ -14,3 +14,6 @@ decodeChar x | x < 0 = chr (127)
 decodeChar x | x > 94 = chr (127)
 decodeChar x = chr (x + 32)
 
+vernamCipher :: Char -> Char -> Char
+vernamCipher input key = 'A'
+
