@@ -80,6 +80,10 @@ prop_vernamCipherSymmetry :: Char -> Char -> Bool
 prop_vernamCipherSymmetry input key =
     vernamCipher input key == vernamCipher key input
 
+prop_vernamCipherIdempotent :: Char -> Char -> Bool
+prop_vernamCipherIdempotent input key =
+    vernamCipher input key == vernamCipher input key
+
 prop_vernamCipherReciprocity :: Char -> Char -> Bool
 prop_vernamCipherReciprocity input key =
     if charInRange input && charInRange key
@@ -116,22 +120,33 @@ prop_randomCharIsAscii seed =
 prop_lorenzCipherIsAscii :: String -> Char -> Bool
 prop_lorenzCipherIsAscii input key =
     if length input > 0
-        then or (map isAscii (lorenzCipher input key))
+        then and (map isAscii (lorenzCipher input key))
     else lorenzCipher input key == input
 
 prop_lorenzCipherInputChanges :: String -> Char -> Bool
 prop_lorenzCipherInputChanges input key =
     if length input == 0
         then lorenzCipher input key == input
-    else if or (map charInRange input) && charInRange key
+    else if and (map charInRange input) && charInRange key
         then lorenzCipher input key /= lorenzCipher ((decodeChar (rem (encodeChar (head input) + 1) 63)) : tail input) key
-    else if or (map charInRange input) || charInRange key
-        then or (map charInRange (lorenzCipher input key))
+    else if and (map charInRange input) || charInRange key
+        then and (map charInRange (lorenzCipher input key))
     else length (lorenzCipher input key) == length (input)
 
 prop_lorenzCipherIdempotent :: String -> Char -> Bool
 prop_lorenzCipherIdempotent input key =
     lorenzCipher input key == lorenzCipher input key
+
+prop_lorenzCipherReciprocity :: String -> Char -> Bool
+prop_lorenzCipherReciprocity input key =
+    if and (map charInRange input)
+        then lorenzCipher (lorenzCipher input key) key == input
+    else 
+        lorenzCipher (lorenzCipher input key) key == zipWith (\x y -> if y then x else '_') input (map charInRange input)
+
+prop_lorenzCipherLength :: String -> Char -> Bool
+prop_lorenzCipherLength input key =
+    length input == length (lorenzCipher input key)
 
 --------------------------------------------------------------------------
 -- main
