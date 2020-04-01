@@ -22,8 +22,8 @@ vernamCipher input key = decodeChar (xor (encodeChar input) (encodeChar key))
 
 data SeedPair = SeedPair (Char, StdGen) deriving (Show, Read)
 
-getChar :: SeedPair -> Char
-getChar (SeedPair pair) = fst pair
+getChr :: SeedPair -> Char
+getChr (SeedPair pair) = fst pair
 
 getSeed :: SeedPair -> StdGen
 getSeed (SeedPair pair) = snd pair
